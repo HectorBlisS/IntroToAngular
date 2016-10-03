@@ -4,6 +4,11 @@
 	<title>Curso mijo</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<style type="text/css">
+		.color{
+			background:red;
+		}
+	</style>
 </head>
 <body>
 
@@ -23,7 +28,7 @@
 				<li ng-class="{ active:panel.isActive(2)}">
 					<a href ng-click="panel.selectTab(2)">Descripción</a>
 				</li>
-				<li ng-class="{ active,disabled:panel.isActive(3)}">
+				<li ng-class="{ disabled:panel.isActive(3)}">
 					<a href ng-click="panel.selectTab(3)">Precio</a>
 				</li>
 			</ul>
@@ -40,6 +45,30 @@
 			</div>
 		</div>
 
+<div ng-controller="ReviewController as reviewCtrl">
+		<ul class="list-group">
+		  <li ng-repeat="review in product.comments" class="list-group-item">
+		    <span class="badge">{{review.stars}}</span>
+		   	{{review.body}}
+		  </li>
+		  <li class="list-group-item">
+		    <span class="badge">{{reviewCtrl.review.stars}}</span>
+		   	{{reviewCtrl.review.body}}
+		  </li>
+		</ul>
+		<form ng-submit="reviewCtrl.submitReview(product)">
+		<div class="input-group">
+			  
+			  <input ng-model="reviewCtrl.review.stars" type="text" class="form-control" placeholder="Estrellas" aria-describedby="basic-addon1">
+			
+			  <input ng-model="reviewCtrl.review.body" type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
+			  <input type="submit" value="Subele mijo">
+			  
+		</div>
+		</form>
+</div><!-- ng-controller-->
+
+	
 		
 		
 		
@@ -76,16 +105,46 @@
 		}
 	});
 
+	app.controller('ReviewController',function(){
+		this.review = {};
+		this.submitReview = function(product){
+			product.comments.push(this.review);
+			this.review={};
+		};
+	});
+
 	var gems = [{
 		name:'BlisSy',
 		desc:'Sabroson',
 		price:77,
-		canBuy:true
+		canBuy:true,
+		comments:[
+			{
+				stars:5,
+				body:"De lujo paps!",
+				author:'BlisS'
+			},{
+				stars:4,
+				body:"De la Ñonga",
+				author:'Fuckyy'
+			}
+		]
 	},{
 		name:"Fucky",
 		desc:"Putty",
 		price:88,
-		canBuy:false
+		canBuy:false,
+		comments:[
+			{
+				stars:5,
+				body:"Ya llego Saúl",
+				author:'Juan'
+			},{
+				stars:4,
+				body:"Quieren hierba?, dejo mi numero 77454508",
+				author:'GreenBoy'
+			}
+		]
 	}];
 
 
