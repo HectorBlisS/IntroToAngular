@@ -1,0 +1,60 @@
+<html ng-app="store">
+<head>
+	<meta charset="urf-8">
+	<title>Curso mijo</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+
+<section style="width:80%; margin:0 auto;">
+	<h2>
+		Manda un saludo a tus hermanos: {{"put"+"tos"+"!"}}, {{2+7}}
+	</h2>
+	<div ng-controller="StoreController as store">
+
+		<div ng-repeat="product in store.products">
+		<h3>{{product.name}}</h3>
+		<p>{{product.desc}}</p>
+		<h4>{{product.price}}</h4>
+		<button ng-show="product.canBuy">Compralo! yA!</button>
+		</div>
+
+	</div>
+</section>
+
+
+
+<script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript">
+(function(){
+
+	var app = angular.module('store',[]);
+
+	app.controller('StoreController',StoreController);
+	function StoreController(){
+		this.products = gems;
+	}
+
+	var gems = [{
+		name:'BlisSy',
+		desc:'Sabroson',
+		price:77,
+		canBuy:true
+	},{
+		name:"Fucky",
+		desc:"Putty",
+		price:88,
+		canBuy:false
+	}]
+
+})();
+	
+
+
+</script>
+</body>
+</html>
