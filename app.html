@@ -8,6 +8,16 @@
 		.color{
 			background:red;
 		}
+		.ng-invalid.ng-dirty{
+			border-color:red;
+		}
+		.ng-valid.ng-dirty{
+			border-color:green;
+		}
+		.ng-pristine{
+			border-color: yellow;
+		}
+
 	</style>
 </head>
 <body>
@@ -56,15 +66,21 @@
 		   	{{reviewCtrl.review.body}}
 		  </li>
 		</ul>
-		<form ng-submit="reviewCtrl.submitReview(product)">
+		<form name="lolForm" ng-submit="lolForm.$valid && reviewCtrl.submitReview(product)" novalidate>
 		<div class="input-group">
 			  
-			  <input ng-model="reviewCtrl.review.stars" type="text" class="form-control" placeholder="Estrellas" aria-describedby="basic-addon1">
+			  <input ng-model="reviewCtrl.review.stars" type="number" class="form-control" placeholder="Estrellas" aria-describedby="basic-addon1" required min="2000">
 			
-			  <input ng-model="reviewCtrl.review.body" type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
+			  <input ng-model="reviewCtrl.review.body" type="email" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2" required>
 			  <input type="submit" value="Subele mijo">
 			  
 		</div>
+		<div>El formulario es {{lolForm.$valid}}</div>
+		<div ng-hide="lolForm.$valid" class="alert alert-danger alert-dismissible" role="alert">Estas bien wey
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span></button></div>
+		<div ng-show="lolForm.$valid" class="alert alert-success alert-dismissible" role="alert">mmm ok</div>
+
 		</form>
 </div><!-- ng-controller-->
 
@@ -84,10 +100,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/X.Y.Z/angular-animate.js"
+></script>
 <script type="text/javascript">
 (function(){
 
-	var app = angular.module('store',[]);
+	var app = angular.module('store',['ngAnimate']);
 
 	app.controller('StoreController',StoreController);
 	function StoreController(){
